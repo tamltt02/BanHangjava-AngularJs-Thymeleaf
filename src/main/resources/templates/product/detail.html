@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{/layout/index :: dynamic(~{::main})}"
+>
+  // thay toan bo nd của list bởi 1 fragment có ten dynalic layout, dua thẻ main
+  vào cùng layout đó
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    <main th:object="${item}" class="poly-item-detail">
+     <div class="row">
+       <div class="panel panel-primary">
+            <div class="panel-body text-center">
+                <img th:src="@{|/assets/images/*{image}|}">
+            </div>
+       </div>
+         <div class="panel panel-primary">
+             <div class="panel-body">
+                 <ul>
+                     <li th:utext="*{name}"></li>
+                     <li th:utext="*{price}"></li>
+                     <li th:utext="*{createDate}"></li>
+                     <li th:utext="*{category.name}"></li>
+                 </ul>
+             </div>
+             <div class="panel-footer text-right">
+                 <button class="btn btn-success">
+                     <i class="glyphicon glyphicon-shopping-cart"></i>
+                 </button>
+             </div>
+         </div>
+     </div>
+     <div class="row">
+         <div class="panel panel-primary">
+             <div class="panel-heading">
+                 HÀNG CÙNG LOẠI
+             </div>
+             <div class="panel-body">
+                 <ul>
+                     <li th:each="p:*{category.products}">
+                         <a th:href="@{|/product/detail/${p.id}|}" th:utext="${p.name}"></a>
+                     </li>
+                 </ul>
+             </div>
+         </div>
+     </div>
+      </ul>
+    </main>
+  </body>
+</html>
